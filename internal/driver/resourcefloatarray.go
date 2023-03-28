@@ -20,8 +20,8 @@ import (
 
 type resourceFloatArray struct{}
 
-func (rf *resourceFloatArray) value(db *db, deviceName, deviceResourceName, minimum,
-	maximum string) (*models.CommandValue, error) {
+func (rf *resourceFloatArray) value(db *db, deviceName, deviceResourceName string, minimum,
+	maximum *float64) (*models.CommandValue, error) {
 
 	result := &models.CommandValue{}
 

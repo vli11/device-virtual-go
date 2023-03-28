@@ -19,8 +19,8 @@ import (
 
 type resourceInt struct{}
 
-func (ri *resourceInt) value(db *db, deviceName, deviceResourceName, minimum,
-	maximum string) (*models.CommandValue, error) {
+func (ri *resourceInt) value(db *db, deviceName, deviceResourceName string, minimum,
+	maximum *float64) (*models.CommandValue, error) {
 
 	result := &models.CommandValue{}
 
