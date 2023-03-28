@@ -23,7 +23,7 @@ func parseStrToInt(str string, bitSize int) (int64, error) {
 }
 
 func parseIntMinimumMaximum(minimum, maximum *float64, dataType string) (int64, int64, error) {
-	var err, err1, err2 error
+	var err error
 	if minimum == nil || maximum == nil {
 		err = fmt.Errorf("minimum:%v maximum:%v are not in valid range, use default value", minimum, maximum)
 		return 0, 0, err
@@ -31,7 +31,14 @@ func parseIntMinimumMaximum(minimum, maximum *float64, dataType string) (int64, 
 
 	var min, max int64
 	min = int64(*minimum)
-	max = int64(*maximum)
+	var mmax float64
+	mmax = *maximum
+	max = int64(mmax)
+
+	if max <= min {
+		err = fmt.Errorf("minimum:%v maximum:%v are not in valid range, use default value", minimum, maximum)
+		return 0, 0, err
+	}
 
 	// switch dataType {
 	// case common.ValueTypeInt8, common.ValueTypeInt8Array:
@@ -123,7 +130,6 @@ func parseUintMinimumMaximum(minimum, maximum *float64, dataType string) (uint64
 	min = uint64(*minimum)
 	max = uint64(*maximum)
 
-	return min, max, err
 	return min, max, err
 }
 

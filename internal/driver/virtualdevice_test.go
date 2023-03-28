@@ -8,6 +8,7 @@ package driver
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"reflect"
 	"testing"
@@ -207,7 +208,8 @@ func TestValueIntx(t *testing.T) {
 	ValueIntx(t, nameInt32, nameInt32, &min, &max)
 	ValueIntx(t, nameInt32, nameInt32, nil, nil)
 	min = -9223372036854775808
-	max = 9223372036854775807
+	max = math.MaxInt64 //9223372036854775807
+
 	ValueIntx(t, nameInt64, nameInt64, &min, &max)
 	ValueIntx(t, nameInt64, nameInt64, nil, nil)
 }
@@ -298,10 +300,7 @@ func TestValueFloatxArray(t *testing.T) {
 
 func TestValueBinary(t *testing.T) {
 	vd := newVirtualDevice()
-	var min, max float64
-	min = 0
-	max = 0
-	v1, err := vd.read(deviceName, nameBinary, nameBinary, &min, &max, nil)
+	v1, err := vd.read(deviceName, nameBinary, nameBinary, nil, nil, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
